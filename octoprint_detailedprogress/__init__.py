@@ -143,7 +143,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			currentData["progress"]["printTimeLeftString"] = self._get_time_from_seconds(currentData["progress"]["printTimeLeft"])
 			self._logger.info("████████████████████████████████████████████████████████████")
 			self._logger.info("Attempting to print time data")
-			self._logger.info("time zone offset type: " + type(self._time_zone_offset))
+			self._logger.info("time zone offset type: " + str(type(self._time_zone_offset)))
 			self._logger.info("time zone offset (seconds): " + str(float(self._time_zone_offset) * 3600))
 			self._logger.info("time sum (seconds): " + str(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600))
 			self._logger.info("time string: ")
