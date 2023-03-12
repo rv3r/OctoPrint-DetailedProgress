@@ -23,6 +23,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 	_messages = []
 	_M73 = False
 	_M73_R = False
+	_time_zone_offset = 0
 	
 	def on_event(self, event, payload):
 		if event == Events.PRINT_STARTED:
@@ -130,6 +131,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 				currentData["progress"]["printTime"])
 			currentData["progress"]["printTimeLeftString"] = self._get_time_from_seconds(
 				currentData["progress"]["printTimeLeft"])
+			self._logger.info("time zone offset type: " + type(self._time_zone_offset))
 			self._logger.info("time zone offset (seconds): " + str(self._time_zone_offset * 3600))
 			self._logger.info("time sum (seconds): " + str(time.time() + currentData["progress"]["printTimeLeft"] + self._time_zone_offset * 3600))
 			self._logger.info("time string: ")
@@ -240,7 +242,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/tpmullan/OctoPrint-DetailedProgress/archive/{target_version}.zip"
+				pip="https://github.com/rv3r/OctoPrint-DetailedProgress/archive/{target_version}.zip"
 			)
 		)
 
