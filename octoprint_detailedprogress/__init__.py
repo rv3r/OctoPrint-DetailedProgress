@@ -93,7 +93,9 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 
 		except Exception as e:
 			self._logger.info("████████████████████████████████████████████████████████████")
+			self._logger.info("\n\n")
 			self._logger.info("Caught an exception {0}\nTraceback:{1}".format(e, traceback.format_exc()))
+			self._logger.info("\n\n")
 			self._logger.info("████████████████████████████████████████████████████████████")
 
 	def _update_progress(self, currentData):
@@ -159,7 +161,9 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 					currentData["progress"]["changeFilamentIn"] = self._get_time_from_seconds(self._changeFilamentSeconds)
 		except Exception as e:
 			self._logger.info("████████████████████████████████████████████████████████████")
+			self._logger.info("\n\n")
 			self._logger.debug("Caught an exception trying to parse data: {0}\n Error is: {1}\nTraceback:{2}".format(currentData, e, traceback.format_exc()))
+			self._logger.info("\n\n")
 			self._logger.info("████████████████████████████████████████████████████████████")
 
 		return currentData
