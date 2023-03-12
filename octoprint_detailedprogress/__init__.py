@@ -217,7 +217,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			use_M73=True,
 			use_M73_R=False,
 			show_ip_at_startup=True,
-			time_zone_offset = 4,
+			time_zone_offset = -100,
 			all_messages=[
 				'{filename}',
 				'{completion:.2f}% complete', 
