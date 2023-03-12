@@ -37,7 +37,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			self._repeat_timer = octoprint.util.RepeatedTimer(self._settings.get_int(["time_to_change"]), self.do_work)
 			self._repeat_timer.start()
 			self._time_zone_offset = self._settings.get(["time_zone_offset"])
-			self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours)
+			self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours")
 		elif event in (Events.PRINT_DONE, Events.PRINT_FAILED, Events.PRINT_CANCELLED):
 			if self._repeat_timer is not None:
 				self._repeat_timer.cancel()
