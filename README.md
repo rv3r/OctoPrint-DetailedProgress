@@ -10,7 +10,7 @@ A plugin that sends M117 (and optionally M73) commands to the printer to display
 
 Install manually using this URL:
 
-    https://github.com/tpmullan/OctoPrint-DetailedProgress/archive/master.zip
+    https://github.com/rv3r/OctoPrint-DetailedProgress/archive/master.zip
     
 ## Dependencies for layer progress etc. [Optional] 
 
@@ -46,6 +46,8 @@ plugins:
       - "ETL: {printTimeLeft}"
       - "ETA: {ETA}"
     print_done_message: "Print Done"
+    # Number of hours (can be negative, float, etc) to offset ETA by
+    Time Zone Offset: -3
 ```
 ### Plugin Settings menu
 
