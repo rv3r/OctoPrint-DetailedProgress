@@ -26,12 +26,6 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 	_time_zone_offset = 0
 	
 	def on_event(self, event, payload):
-		# if event == Events.STARTUP:
-			# self._logger.info("████████████████████████████████████████████████████████████")
-			# self._logger.info("time zone offset: " + str(7) + " hours")
-			# self._time_zone_offset = self._settings.get(["time_zone_offset"])
-			# self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours")
-			# self._logger.info("████████████████████████████████████████████████████████████")
 		if event == Events.PRINT_STARTED:
 			self._logger.info("Printing started. Detailed progress started.")
 			self._etl_format = self._settings.get(["etl_format"])
@@ -42,10 +36,10 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			self._M73_R = self._settings.get(["use_M73_R"])
 			self._repeat_timer = octoprint.util.RepeatedTimer(self._settings.get_int(["time_to_change"]), self.do_work)
 			self._repeat_timer.start()
-			# self._logger.info("████████████████████████████████████████████████████████████")
-			# self._time_zone_offset = self._settings.get(["time_zone_offset"])
-			# self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours")
-			# self._logger.info("████████████████████████████████████████████████████████████")
+			self._logger.info("████████████████████████████████████████████████████████████")
+			self._time_zone_offset = self._settings.get(["time_zone_offset"])
+			self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours")
+			self._logger.info("████████████████████████████████████████████████████████████")
 		elif event in (Events.PRINT_DONE, Events.PRINT_FAILED, Events.PRINT_CANCELLED):
 			if self._repeat_timer is not None:
 				self._repeat_timer.cancel()
@@ -146,6 +140,8 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			self._logger.info("████████████████████████████████████████████████████████████")
 			self._logger.info("Attempting to print time data")
 			# self._logger.info("time zone offset type: " + str(type(self._time_zone_offset)))
+			self._logger.info(self._time_zone_offset)
+			self._logger.info("time zone offset (hours): " + str(float(self._time_zone_offset)))
 			self._logger.info("time zone offset (seconds): " + str(float(self._time_zone_offset) * 3600))
 			# self._logger.info("time sum (seconds): " + str(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600))
 			self._logger.info("time string: ")
@@ -221,7 +217,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			use_M73=True,
 			use_M73_R=False,
 			show_ip_at_startup=True,
-			time_zone_offset = 0,
+			time_zone_offset = 4,
 			all_messages=[
 				'{filename}',
 				'{completion:.2f}% complete', 
