@@ -26,6 +26,10 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 	_time_zone_offset = 0
 	
 	def on_event(self, event, payload):
+		if event == Events.STARTUP:
+			self._logger.info("STARTUP")
+			self._time_zone_offset = self._settings.get(["time_zone_offset"])
+			self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours")
 		if event == Events.PRINT_STARTED:
 			self._logger.info("Printing started. Detailed progress started.")
 			self._etl_format = self._settings.get(["etl_format"])
