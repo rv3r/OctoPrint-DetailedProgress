@@ -130,7 +130,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			currentData["progress"]["printTimeLeftString"] = self._get_time_from_seconds(
 				currentData["progress"]["printTimeLeft"])
 			currentData["progress"]["ETA"] = time.strftime(self._eta_strftime, time.localtime(
-				time.time() + currentData["progress"]["printTimeLeft"]))
+				time.time() + currentData["progress"]["printTimeLeft"]) + self._time_zone_offset)
 			currentData["progress"]["layerProgress"] = self._layerIs
 			currentData["progress"]["heightProgress"] = self._heightIs
 			if isinstance(self._changeFilamentSeconds, int):
@@ -199,6 +199,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			use_M73=True,
 			use_M73_R=False,
 			show_ip_at_startup=True,
+			time_zone_offset = 0,
 			all_messages=[
 				'{filename}',
 				'{completion:.2f}% complete', 
