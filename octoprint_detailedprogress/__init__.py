@@ -36,10 +36,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			self._M73_R = self._settings.get(["use_M73_R"])
 			self._repeat_timer = octoprint.util.RepeatedTimer(self._settings.get_int(["time_to_change"]), self.do_work)
 			self._repeat_timer.start()
-			self._logger.info("████████████████████████████████████████████████████████████")
 			self._time_zone_offset = self._settings.get(["time_zone_offset"])
-			self._logger.info("time zone offset: " + str(self._time_zone_offset) + " hours")
-			self._logger.info("████████████████████████████████████████████████████████████")
 		elif event in (Events.PRINT_DONE, Events.PRINT_FAILED, Events.PRINT_CANCELLED):
 			if self._repeat_timer is not None:
 				self._repeat_timer.cancel()
@@ -86,11 +83,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 				self._update_progress(currentData)
 
 		except Exception as e:
-			self._logger.info("████████████████████████████████████████████████████████████")
-			self._logger.info("\n\n")
 			self._logger.info("Caught an exception {0}\nTraceback:{1}".format(e, traceback.format_exc()))
-			self._logger.info("\n\n")
-			self._logger.info("████████████████████████████████████████████████████████████")
 
 	def _update_progress(self, currentData):
 		progressPerc = int(currentData["progress"]["completion"])
@@ -137,16 +130,6 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 		try:
 			currentData["progress"]["printTimeString"] = self._get_time_from_seconds(currentData["progress"]["printTime"])
 			currentData["progress"]["printTimeLeftString"] = self._get_time_from_seconds(currentData["progress"]["printTimeLeft"])
-			self._logger.info("████████████████████████████████████████████████████████████")
-			self._logger.info("Attempting to print time data")
-			# self._logger.info("time zone offset type: " + str(type(self._time_zone_offset)))
-			self._logger.info(self._time_zone_offset)
-			self._logger.info("time zone offset (hours): " + str(float(self._time_zone_offset)))
-			self._logger.info("time zone offset (seconds): " + str(float(self._time_zone_offset) * 3600))
-			# self._logger.info("time sum (seconds): " + str(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600))
-			self._logger.info("time string: ")
-			self._logger.info(time.strftime(self._eta_strftime, time.localtime(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600)))
-			self._logger.info("████████████████████████████████████████████████████████████")
 			currentData["progress"]["ETA"] = time.strftime(self._eta_strftime, time.localtime(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600))
 			currentData["progress"]["layerProgress"] = self._layerIs
 			currentData["progress"]["heightProgress"] = self._heightIs
@@ -156,11 +139,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 				else: 
 					currentData["progress"]["changeFilamentIn"] = self._get_time_from_seconds(self._changeFilamentSeconds)
 		except Exception as e:
-			self._logger.info("████████████████████████████████████████████████████████████")
-			self._logger.info("\n\n")
 			self._logger.debug("Caught an exception trying to parse data: {0}\n Error is: {1}\nTraceback:{2}".format(currentData, e, traceback.format_exc()))
-			self._logger.info("\n\n")
-			self._logger.info("████████████████████████████████████████████████████████████")
 
 		return currentData
 
@@ -217,7 +196,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			use_M73=True,
 			use_M73_R=False,
 			show_ip_at_startup=True,
-			time_zone_offset = -100,
+			time_zone_offset = 0,
 			all_messages=[
 				'{filename}',
 				'{completion:.2f}% complete', 
