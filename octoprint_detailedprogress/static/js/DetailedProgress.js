@@ -15,6 +15,7 @@ $(function() {
     self.eta_strftime = ko.observable();
     self.etl_format = ko.observable();
     self.print_done_message = ko.observable();
+    self.time_zone_format = ko.observable();
     self.use_M73 = ko.observable();
     self.use_M73_R = ko.observable();
     self.show_ip_at_startup = ko.observable();
@@ -29,6 +30,7 @@ $(function() {
       self.use_M73_R(self.settings.settings.plugins.detailedprogress.use_M73_R());
       self.show_ip_at_startup(self.settings.settings.plugins.detailedprogress.show_ip_at_startup());
       self.print_done_message(self.settings.settings.plugins.detailedprogress.print_done_message());
+      self.time_zone_offset(self.settings.settings.plugins.detailedprogress.time_zone_offset());
       self.messages(self.settings.settings.plugins.detailedprogress.messages());
       self.all_messages(self.settings.settings.plugins.detailedprogress.all_messages());
     };
@@ -41,6 +43,7 @@ $(function() {
       self.use_M73_R = self.settings.settings.plugins.detailedprogress.use_M73_R();
       self.show_ip_at_startup = self.settings.settings.plugins.detailedprogress.show_ip_at_startup();
       self.print_done_message = self.settings.settings.plugins.detailedprogress.print_done_message();
+      self.time_zone_offset = self.settings.settings.plugins.detailedprogress.time_zone_offset();
       self.messages = self.settings.settings.plugins.detailedprogress.messages();
       self.all_messages = self.settings.settings.plugins.detailedprogress.all_messages();
     };
