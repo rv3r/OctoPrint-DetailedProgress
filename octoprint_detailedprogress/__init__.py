@@ -41,7 +41,6 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			if self._repeat_timer is not None:
 				self._repeat_timer.cancel()
 				self._repeat_timer = None
-			self._logger.info(str(self._time_zone_offset))
 			self._logger.info("Printing stopped. Detailed progress stopped.")
 			message = self._settings.get(["print_done_message"])
 			self._printer.commands("M117 {}".format(message))
