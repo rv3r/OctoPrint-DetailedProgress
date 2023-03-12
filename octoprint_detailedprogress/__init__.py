@@ -35,6 +35,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			self._M73_R = self._settings.get(["use_M73_R"])
 			self._repeat_timer = octoprint.util.RepeatedTimer(self._settings.get_int(["time_to_change"]), self.do_work)
 			self._repeat_timer.start()
+			self._time_zone_offset = self._settings.get(["time_zone_offset"])
 		elif event in (Events.PRINT_DONE, Events.PRINT_FAILED, Events.PRINT_CANCELLED):
 			if self._repeat_timer is not None:
 				self._repeat_timer.cancel()
@@ -130,7 +131,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			currentData["progress"]["printTimeLeftString"] = self._get_time_from_seconds(
 				currentData["progress"]["printTimeLeft"])
 			currentData["progress"]["ETA"] = time.strftime(self._eta_strftime, time.localtime(
-				time.time() + currentData["progress"]["printTimeLeft"]) + self._time_zone_offset * 3600)
+				time.time() + currentData["progress"]["printTimeLeft"] + self._time_zone_offset * 3600))
 			currentData["progress"]["layerProgress"] = self._layerIs
 			currentData["progress"]["heightProgress"] = self._heightIs
 			if isinstance(self._changeFilamentSeconds, int):
