@@ -147,7 +147,7 @@ class DetailedProgress(octoprint.plugin.EventHandlerPlugin,
 			self._logger.info("time zone offset (seconds): " + str(float(self._time_zone_offset) * 3600))
 			self._logger.info("time sum (seconds): " + str(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600))
 			self._logger.info("time string: ")
-			self._logger.info(time.localtime(time.time() + currentData["progress"]["printTimeLeft"] + 6 * 3600))
+			self._logger.info(time.strftime(self._eta_strftime, time.localtime(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600)))
 			self._logger.info("████████████████████████████████████████████████████████████")
 			currentData["progress"]["ETA"] = time.strftime(self._eta_strftime, time.localtime(time.time() + currentData["progress"]["printTimeLeft"] + float(self._time_zone_offset) * 3600))
 			currentData["progress"]["layerProgress"] = self._layerIs
